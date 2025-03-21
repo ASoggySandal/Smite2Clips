@@ -22,3 +22,12 @@ python GatherClips.py [--download]
 ## Output
 - `matched_clips.xlsx`: Excel file containing fetched clip information.
 - `clips/`: Directory containing downloaded clips (if `--download` is used).
+
+## Register a Twitch App
+
+To get a `CLIENT_ID` and `CLIENT_SECRET` for auth you'll need to register an application on the [Twitch Dev Console](https://dev.twitch.tv/console).
+ - Register an App
+ - Set a Name
+ - Set redirect to `https://localhost`
+ - Analytics tool
+ - Confidential
