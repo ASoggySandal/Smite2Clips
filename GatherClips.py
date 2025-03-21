@@ -14,6 +14,11 @@ load_dotenv()
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
+# Tweakable limits
+CATEGORY_CLIP_LIMIT = 20
+CHANNEL_CLIP_LIMIT = 10
+DAYS_BACK = 30
+
 # Authenticate with Twitch API
 def get_oauth_token(client_id, client_secret):
     response = requests.post('https://id.twitch.tv/oauth2/token', params={
@@ -34,9 +39,9 @@ def get_user_id(username, headers):
     return response.json()['data'][0]['id']
 
 # Get top clips for game category
-def get_top_category_clips(game_id, headers, limit=20):
+def get_top_category_clips(game_id, headers, limit=CATEGORY_CLIP_LIMIT):
     ended_at = datetime.datetime.utcnow().isoformat("T") + "Z"
-    started_at = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).isoformat("T") + "Z"
+    started_at = (datetime.datetime.utcnow() - datetime.timedelta(days=DAYS_BACK)).isoformat("T") + "Z"
 
     params = {
         'game_id': game_id,
@@ -49,13 +54,13 @@ def get_top_category_clips(game_id, headers, limit=20):
     return response.json()['data']
 
 # Get top clips for each channel filtered by category
-def get_channel_category_clips(user_id, game_id, headers, limit=10):
+def get_channel_category_clips(user_id, game_id, headers, limit=CHANNEL_CLIP_LIMIT):
     ended_at = datetime.datetime.utcnow().isoformat("T") + "Z"
-    started_at = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).isoformat("T") + "Z"
+    started_at = (datetime.datetime.utcnow() - datetime.timedelta(days=DAYS_BACK)).isoformat("T") + "Z"
 
     params = {
         'broadcaster_id': user_id,
-        'first': 100,
+        'first': 300,
         'started_at': started_at,
         'ended_at': ended_at
     }
