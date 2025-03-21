@@ -15,7 +15,7 @@ pip install requests python-dotenv pandas xlsxwriter yt-dlp
 - Populate `channels.txt` with Twitch channel usernames (one per line).
 - Run the script:
 ```bash
-python script.py [--download]
+python GatherClips.py [--download]
 ```
 `--download`: Optional flag to download clips.
 
