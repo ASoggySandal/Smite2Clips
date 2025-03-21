@@ -60,7 +60,7 @@ def get_channel_category_clips(user_id, game_id, headers, limit=CHANNEL_CLIP_LIM
 
     params = {
         'broadcaster_id': user_id,
-        'first': 300,
+        'first': 100,
         'started_at': started_at,
         'ended_at': ended_at
     }
